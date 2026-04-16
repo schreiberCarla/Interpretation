@@ -45,11 +45,10 @@ const NiemandSVG = ({ suitColor }: { suitColor: string }) => (
 function App() {
     const [playerX, setPlayerX] = useState<number>(10);
     const [playerY, setPlayerY] = useState<number>(480); // WEITER UNTEN: 480 statt 420
-    const [height, setHeight] = useState<number>(0);
     const [niemande, setNiemande] = useState<Niemand[]>([]);
     const [showSpeechBubble, setShowSpeechBubble] = useState<boolean>(false);
     const [reachedSummit, setReachedSummit] = useState<boolean>(false);
-    const [gameActive, setGameActive] = useState<boolean>(true);
+    const [gameActive] = useState<boolean>(true);
     const [textIndex, setTextIndex] = useState<number>(0);
     const [steps, setSteps] = useState<number>(0);
     const keysPressed = useRef<Set<string>>(new Set());
@@ -143,7 +142,6 @@ function App() {
                 newX += 1;
                 moved = true;
             }
-
             if (moved && now - lastStepTime.current > 100) {
                 setSteps(prev => prev + 1);
                 lastStepTime.current = now;
@@ -176,7 +174,6 @@ function App() {
             newY = Math.max(SUMMIT_Y, Math.min(GROUND_LEVEL, newY)); // Neuer Boden
 
             const currentHeight = GROUND_LEVEL - newY;
-            setHeight(Math.max(0, Math.round(currentHeight / 2.5))); // Angepasste Höhenberechnung
 
             setPlayerX(newX);
             setPlayerY(newY);
